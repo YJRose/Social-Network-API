@@ -1,28 +1,29 @@
 const router = require('express').Router();
 const {
-  getVideos,
-  getSingleVideo,
-  createVideo,
-  updateVideo,
-  deleteVideo,
-  addVideoResponse,
-  removeVideoResponse,
-} = require('../../controllers/videoController');
+  getThoughts,
+  getSingleThought,
+  createThoughts,
+  updateThought,
+  removeThought,
+  addReactions,
+  removeReaction
 
-// /api/videos
-router.route('/').get(getVideos).post(createVideo);
+} = require('../../controllers/thoughtsController');
 
-// /api/videos/:videoId
+// /api/thoughts
+router.route('/').get(getThoughts).post(createThoughts);
+
+// /api/thoughts/:thoughtId
 router
-  .route('/:videoId')
-  .get(getSingleVideo)
-  .put(updateVideo)
-  .delete(deleteVideo);
+  .route('/:thoughtId')
+  .get(getSingleThought)
+  .put(updateThought)
+  .delete(removeThought);
 
-// /api/videos/:videoId/responses
-router.route('/:videoId/responses').post(addVideoResponse);
+// /api/thoughts/:thoughtId/reactions
+router.route('/:thoughtId/responses').post(addReactions).delete(removeReaction);
 
-// /api/videos/:videoId/responses/:responseId
-router.route('/:videoId/responses/:responseId').delete(removeVideoResponse);
+// /api/thoughts/:thoughtId/reactions/:reactionId
+router.route('/:thoughtId/responses/:responseId').delete(removeReaction);
 
 module.exports = router;
